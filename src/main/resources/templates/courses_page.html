@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:custom="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container-fluid text-center">
+    <div><h2>Courses List</h2></div>
+    <div class="m-2"><a class="h3" th:href="@{/course/new}">ADD COURSE</a></div>
+    <div th:if="${message}" class="alert text-success text-center">
+        [[${message}]]
+    </div>
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>URL</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="course : ${courseList}">
+            <tr>
+                <td>[[${course.courseId}]]</td>
+                <td>[[${course.courseName}]]</td>
+                <td>[[${course.courseDescription}]]</td>
+                <td>[[${course.coursePrice}]]</td>
+                <td>[[${course.courseUrl}]]</td>
+                <td>
+                    <form method="post" th:action="@{'/courses/getCourse/'+${course.courseId}}">
+                        <input type="hidden" name="courseid" id="courseId" />
+                        <button type="submit" name="submit" value="value" class="link-button">This is a link that sends a POST request</button>
+                    </form>
+                    <a th:href="@{'/courses/getCourse/'+${course.courseId}}" custom:linkMethod="post">Edit</a>
+                    <form method="post" th:action="@{'/courses/delete/'+${course.courseId}}">
+                        <input type="hidden" name="courseid" id="courseDeleteId" />
+                        <button type="submit" name="submit" value="value" class="link-button">delete</button>
+                    </form>
+                    <a class="h4" th:href="@{'/courses/delete/'+${course.courseId}}">DELETE</a>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <a th:href="@{/courses/coursesFromClient}">getCourses</a>
+</div>
+</body>
+</html>

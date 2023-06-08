@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>URL</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="course : ${clientCourses}">
+    <tr>
+        <td>[[${course.courseId}]]</td>
+        <td>[[${course.courseName}]]</td>
+        <td>[[${course.courseDescription}]]</td>
+        <td>[[${course.coursePrice}]]</td>
+        <td>[[${course.courseUrl}]]</td>
+    </tr>
+    </th:block>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container-fluid text-center">
+    <div class="h3">Login</div>
+    <div th:if="${message}" class="alert alert-danger">[[${message}]]</div>
+    <form th:action="@{/clients/login/verify}" method="post" th:object="${client}" style="max-width: 500px; margin: 0 auto">
+        <fieldset class="border border-secondary rounded-3">
+            <label class="col-sm-4 col-form-label">Enter your Email:</label>
+            <input type="email" th:field="*{clientEmail}" class="form-control" required minlength="16" maxlength="45">
+            <label class="col-sm-4 col-form-label">Enter your Password:</label>
+            <input type="password" th:field="*{clientPassword}" class="form-control" required minlength="8" maxlength="16">
+            <button type="submit" class="btn btn-primary m-2">SAVE</button>
+            <button type="button" onclick="btnCancel()" class="btn btn-secondary m-2">CANCEL</button>
+            <a th:href="@{/clients/new}">New User</a>
+        </fieldset>
+    </form>
+</div>
+<script type="text/javascript">
+    function btnCancel(){
+        window.location = "[[@{/clients}]]";
+    }
+</script>
+</body>
+</html>
